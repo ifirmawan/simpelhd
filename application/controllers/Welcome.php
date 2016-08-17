@@ -10,8 +10,8 @@ class Welcome extends Dashboard{
 		$this->load_admin_content_view('home');
 	}
 	public function kk_setup($id=false){
-		$data['labels'] 	= $this->labels->kepkel();
-		$data['fields']		= $this->labels->kepkel_field();
+		//$data['labels'] 	= $this->labels->kepkel();
+		//$data['fields']		= $this->labels->kepkel_field();
 		$data['action']		= 'submit_person/new_kepkel';
 		if ($id) {
 			$data['action']	= 'submit_person/update_kepkel';

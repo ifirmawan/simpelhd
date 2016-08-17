@@ -10,21 +10,58 @@
         <?php echo $errors;?></div>
     <?php }?>
     <form action="<?php echo site_url($action);?>" method="post">
-            <?php if (isset($fields)) {
-            unset($labels[0]);
-            foreach ($fields as $key => $value) {?>
-                    <label><?php echo (isset($labels[$key]))? $labels[$key] : 'none';?></label>
-                <?php 
-                switch ($value) {
-                    case 'alamat': ?>
-                    <textarea name="<?php echo $value;?>" class="form-control" rows="3"><?php echo (isset($details[$value]))? $details[$value] : ''; ?></textarea>    
-                    <?php    break;
-                    default: ?>
-                    <input type="text" name="<?php echo $value;?>" class="form-control" value="<?php echo (isset($details[$value]))? $details[$value] : ''; ?>"/>
-                    <?php break;
-                }
-             }
-            }?>
+     <div class="col-md-6 col-xs-12">
+            <div class="form-group">
+                <label>Nama Kepala Keluarga</label>
+                <input type="text" name="nama" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Jumlah Anggota Keluarga</label>
+                <input type="number" name="jml_anggota" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>No. Telephone (Aktif)</label>
+                <input type="number" name="telp" class="form-control" />
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <div class="form-group">
+                <label>Alamat</label>
+                <textarea class="form-control" name="alamat"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Kode Pos</label>
+                <input type="number" name="kodepos" class="form-control" />
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <label>No. RT</label>
+                        <input type="number" name="rt" class="form-control" />
+                    </div>
+                </div>
+                 <div class="col-md-9 col-xs-12">
+                    <div class="form-group">
+                        <label>Nama Ketua RT</label>
+                        <input type="text" name="rt_nama_ketua" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <div class="form-group">
+                        <label>No. RW</label>
+                        <input type="number" name="rw" class="form-control" />
+                    </div>
+                </div>
+                 <div class="col-md-9 col-xs-12">
+                    <div class="form-group">
+                        <label>Nama Ketua RW</label>
+                        <input type="text" name="rw_nama_ketua" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-xs-12 ">
                 <div class="pull-right">
