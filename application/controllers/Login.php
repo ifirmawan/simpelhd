@@ -10,7 +10,7 @@ class Login extends FrontPage{
 
 	function index(){
 		$data['title']	='hello world';
-		$this->portal('login',$data);
+		$this->load_content_view('login',$data);
 	}
 
 	public function login_aksi(){
