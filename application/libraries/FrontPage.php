@@ -9,11 +9,7 @@ class FrontPage extends Pusat_Controller{
 		parent::__construct();
 		$this->cek_session_login();
 	}
-	public function load_content_view($fileName='',$data=array()){
-		$this->load_template_header($data);
-		$this->load->view($fileName,$data);
-		$this->load_template_footer($data);
-	}
+	
 	public function logina($username,$password){
 		$where=array(
 			'username'=>$username,

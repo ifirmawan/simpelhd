@@ -14,15 +14,7 @@ class Dashboard extends Pusat_Controller{
 			$data['myprofile']	= $this->session->userdata();
 		}
 		$data['errors']			= $this->session->flashdata('errors_log');
-		$this->load_template_header($data);
-		$this->load->view('dashboard/menu-sidebar',$data);
-		if (file_exists(APPPATH.'views/dashboard/'.$fileName.'.php')) {
-			$this->load->view('dashboard/'.$fileName,$data);
-		}else{
-			echo $fileName;
-			//$this->load->view($fileName,$data,true);
-		}
-		$this->load_template_footer($data);
+		$this->dashboard($fileName,$data);
 	}
 	public function select_option_view($name='',$data=array(),$id='',$selected=NULL){
 		$n_data = count($data);

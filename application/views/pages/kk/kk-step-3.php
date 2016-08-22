@@ -1,18 +1,3 @@
-<div class="row">
-    <div class="col-lg-12">
-    <section class="panel">
-    <header class="panel-heading">
-        DATA KELUARGA Bpk 
-        <strong><?php echo (isset($personidentity))? ucfirst($personidentity->nama): 'Anonymous';?></strong> 
-        <a href="#" class="btn btn-success" title="lihat details"><i class="glyphicon glyphicon-zoom-in"></i></a>
-    </header>
-    <div class="panel-body">
-    <?php 
-    if (!is_null($errors)) { ?>
-        <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo $errors;?></div>
-    <?php }?>
     <table class="table table-bordered">
     <thead>
         <tr>
@@ -49,9 +34,5 @@
          ?>
     </tbody>
     </table>
-            <a href="<?php echo site_url('welcome/kk_step/2');?>" class="pull-left btn btn-lg btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Sebelumnya</a>        
-            <a href="<?php echo site_url('welcome/kk_step/4');?>" class="pull-right btn btn-lg btn-success"><i class="glyphicon glyphicon-chevron-right"></i> Selanjutnya</a>
-    </div>
-    </section>
-    </div>
-</div>
+<a href="<?php echo site_url('welcome/kk_step/2');?>" class="pull-left btn btn-lg btn-default"><i class="glyphicon glyphicon-chevron-left"></i> Sebelumnya</a>        
+<a href="<?php echo site_url('welcome/kk_step/4');?>" class="pull-right btn btn-lg btn-success"><i class="glyphicon glyphicon-chevron-right"></i> Selanjutnya</a>

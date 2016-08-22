@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database','session','table','email','pagination','form_validation','encryption','upload','user_agent','excel'); //fpdf
+$autoload['libraries'] = array('database','session','table','email','pagination','form_validation','encryption','upload','user_agent','excel','template'); //fpdf
 
 /*
 | -------------------------------------------------------------------

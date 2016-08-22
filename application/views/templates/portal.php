@@ -1,20 +1,20 @@
+<!doctype html>
+<html>
+<head>
+    <title><?php echo $this->template->title->default("Default title"); ?></title>
+    <meta charset="utf-8">
+    <meta name="description" content="<?php echo $this->template->description; ?>">
+    <meta name="author" content="ibm-st3telkom">
+    <?php echo $this->template->meta; ?>
+    <?php echo $this->template->stylesheet; ?>
+    
+</head>
+<body>
 <div class="container">
 <div class="col-xs-12 col-lg-4 col-lg-offset-4">
-	<form role="form" action="<?php echo site_url('Login/login_aksi');?>" method="post">
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" class="form-control" name="username" id="username" placeholder="Masukkan username">
-  </div>
-  <div class="form-group">
-    <label for="pass">Password</label>
-    <input type="password" class="form-control" name="password" id="pass" placeholder="Masukkan password">
-  </div>
-  <button type="submit" class="btn btn-success col-xs-12">login</button>
-  <a href="#resetModal"  data-toggle="modal" > Lupa password?</a>
-</form>	
+		<?php echo $this->template->content; ?>
 </div>
 </div>
-
 
 <!-- Modal -->
 <div class="modal fade" id="resetModal" tabindex="-1" role="dialog" aria-labelledby="resetModalLabel" aria-hidden="true">
@@ -35,3 +35,6 @@
     </div>
   </div>
 </div>
+<?php echo $this->template->javascript; ?>
+</body>
+</html>

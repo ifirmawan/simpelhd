@@ -3,42 +3,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Pusat_Controller extends CI_Controller {
 	private $data	= array();
-	public 	$sesi 	= array();
+	public	$sesi 	= array();
 	function __construct(){
 		parent::__construct();
+		$this->sesi = $this->session->userdata();
 		$this->set_enqueue();
-		$this->set_sesi();
 	}
+
+//--------------------- Templates --------------------
+
 	public function set_enqueue($custom=array()){
 		$n_custom = count($custom);
 		$this->data['css'] = array(
-			'css/bootstrap.min.css'
-			,'css/bootstrap-reset.css'
-			,'font-awesome/css/font-awesome.min.css'
-			,'css/owl.carousel.css'
-			,'css/style.css'
-			,'css/style-responsive.css'
+			'css/bootstrap.min'
+			,'css/bootstrap-reset'
+			,'font-awesome/css/font-awesome.min'
+			,'css/owl.carousel'
+			,'css/style'
+			,'css/style-responsive'
 		);
 		$this->data['js']	= array(				
-				'js/jquery-1.8.3.min.js'
-				,'js/bootstrap.min.js'
-				,'js/jquery.js'
-				,'js/respond.min.js'
-				,'js/jquery.scrollTo.min.js'
-				,'js/jquery.customSelect.min.js'
-				,'js/jquery.sparkline.js'
-				,'js/jquery.nicescroll.js'
-				,'js/owl.carousel.js'
-				,'js/common-scripts.js'
-				,'js/count.js'
-				,'js/deprecated.js'
-				,'js/bootstrap-typeahead.js'
-				,'js/program.custom.js'
-				,'js/datatables/jquery.dataTables.min.js'
-				,'js/datatables/dataTables.bootstrap.js'
-				,'js/datatables/dataTables.buttons.min.js'
-				,'js/datatables/buttons.bootstrap.min.js'
-				,'js/datatables/dataTables.custom.js'
+				'base/jquery-1.8.3.min'
+				,'base/jquery'
+				,'base/bootstrap.min'
+				,'base/deprecated'
+				,'plug-in/respond.min'
+				,'plug-in/jquery.scrollTo.min'
+				,'plug-in/jquery.customSelect.min'
+				,'plug-in/jquery.sparkline'
+				,'plug-in/jquery.nicescroll'
+				,'plug-in/owl.carousel'
+				,'plug-in/common-scripts'
+				,'plug-in/count'
+				,'plug-in/bootstrap-typeahead'
+				,'datatables/jquery.dataTables.min'
+				,'datatables/dataTables.bootstrap'
+				,'datatables/dataTables.buttons.min'
+				,'datatables/buttons.bootstrap.min'
+				,'datatables/dataTables.custom'
+				,'my-stuff/simpel.program'
 			);
 
 		if ($n_custom > 0) {
@@ -50,47 +53,53 @@ class Pusat_Controller extends CI_Controller {
 			}
 		}
 	}
-	public function get_enqueue_css(){
-		return $this->data['css'];
-	}
-	public function get_enqueue_js(){
-		return $this->data['js'];
-	}
-	public function load_template_header($custom=array()){
-		$data['ResourceCSS'] = $this->get_enqueue_css();
-		$data				 = $this->merge_two_arrays($data,$custom);
-		$this->load->view('templates/header',$data);
-	}
-	public function load_template_footer($custom=array()){
-		$data['ResourceJS']	 = $this->get_enqueue_js();
-		$data				 = $this->merge_two_arrays($data,$custom);
-		$this->load->view('templates/footer',$data);
-	}
 
-	public function merge_two_arrays($ori=array(),$custom=array()){
-		$n_custom	 = count($custom);
-		if ($n_custom > 0){
-			$ori = array_merge($ori,$custom);
+	function load_enqueue(){
+		foreach ($this->data['css'] as $key => $value) {
+			$this->template->stylesheet->add(base_url().'assets/'.$value.'.css');
 		}
-		return $ori;
-	}
-	public function set_sesi(){
-		$this->sesi = $this->session->userdata();
+		foreach ($this->data['js'] as $key => $value) {
+			$this->template->javascript->add(base_url().'assets/js/'.$value.'.js');
+		}
 	}
 
-	public function cek_session_login(){
+	function set_attribute_view($data=array()){
+		(isset($data['title']))? $this->template->title 	=$data['title'] : $this->template->title 	= 'Welcome!';
+		(isset($data['footer']))? $this->template->footer 	=$data['footer'] : $this->template->footer 	= 'Professional Software Development';
+	}
+
+	function base_view($page='',$data=array()){
+		$this->load_enqueue();
+		$this->set_attribute_view($data);
+        $this->template->content->view('pages/'.$page, $data);
+       	$this->template->publish();
+	}
+	function dashboard($page='home',$data=array()){
+		$this->template->set_template('templates/dashboard');
+		$data['bar_navigation_top'] = $this->template->widget('navigation',$data);
+		$data['bar_menu_side'] 		= $this->template->widget('sidebar',$data);
+		$this->base_view($page,$data);
+	}
+	function portal($page='login',$data=array()){
+		$this->base_view($page,$data);
+	}
+	
+//---------- session ---------------------
+
+	function cek_session_login(){
 		if (isset($this->sesi['id'])) {
 			redirect('home','refresh');
 		}
 	}
 
-	public function cek_no_session_login(){
+	function cek_no_session_login(){
 		if (!isset($this->sesi['id'])) {
 			redirect('login/index','refresh');
 		}
 	}
 	
-	//----------datatables------------------//
+//----------datatables------------------//
+
 	function change_keys_with_numb($data=array()){
 		$n = count($data);
 		$send =array();
